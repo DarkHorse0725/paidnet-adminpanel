@@ -1,6 +1,9 @@
 "use client"
+import { URLS } from "@/constants/router";
+import { AuthContext } from "@/hooks/provider";
 import { Button, Input } from "@headlessui/react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useCallback, useContext, useState } from "react";
 
 
 
@@ -8,7 +11,14 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  
+  const { login } = useContext(AuthContext);
+
+  const router = useRouter();
+
+  const signin = useCallback(async () => {
+    await login(email, password);
+    router.push(URLS.projects);
+  }, [email, password])
 
   return (
     <div className="w-screen h-screen">
@@ -36,6 +46,7 @@ const LoginPage = () => {
           />
         </div>
         <Button
+          onClick={signin}
           className="w-full h-[40px] rounded-md bg-primary text-slate-200"
         >
           Login
