@@ -1,6 +1,22 @@
+"use client"
+import { URLS } from "@/constants/router";
+import { AuthContext } from "@/hooks/provider";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect } from "react";
 
 export default function Home() {
+
+  const { isAuthenticated } = useContext(AuthContext);
+  const router = useRouter();
+  useEffect(() => {
+    console.log(isAuthenticated)
+    if (!isAuthenticated) {
+      router.push(URLS.login);
+    }
+    
+  }, [])
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
