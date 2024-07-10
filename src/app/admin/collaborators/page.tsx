@@ -3,15 +3,12 @@
 import { PageContext } from "@/hooks/provider";
 import { useContext } from "react";
 
-
-const ProjectsPage = () => {
+const CollaboratorsPage = () => {
   const { setPageName } = useContext(PageContext);
-  setPageName('Projects');
+  setPageName("Collaborators")
   return (
-    <div className="container">
-
-    </div>
+    <div></div>
   );
 }
 
-export default ProjectsPage;
+export default CollaboratorsPage;
