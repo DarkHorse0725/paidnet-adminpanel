@@ -13,6 +13,8 @@ export default function Home() {
     console.log(isAuthenticated)
     if (!isAuthenticated) {
       router.push(URLS.login);
+    } else {
+      router.push(URLS.projects)
     }
     
   }, [])

@@ -29,6 +29,7 @@ const config: Config = {
       background: '#0D1324',
       paper: '#1D2736',
       slate: colors.blueGray,
+      white: colors.white,
     }
   },
   plugins: [],

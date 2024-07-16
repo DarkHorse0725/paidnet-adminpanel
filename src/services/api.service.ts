@@ -9,3 +9,29 @@ export const authService = {
     return res.data;
   }
 }
+
+export const poolService = {
+  getPools: async () => {
+    const res = await axios.get(`${baseUrl}/pools`);
+    return res.data;
+  },
+  getPool: async (pubkey: string) => {
+    const res = await axios.get(`${baseUrl}/pools/${pubkey}`);
+    return res.data;
+  },
+  getPoolAccount: async (pubkey: string) => {
+    const res = await axios.get(`${baseUrl}/pools/account/${pubkey}`);
+    return res.data;
+  },
+  getUserPools: async (userId: string) => {
+    const res = await axios.get(`${baseUrl}/pools/user/${userId}`);
+    return res.data;
+  }
+}
+
+export const userService = {
+  getCollaborators: async () => {
+    const res = await axios.get(`${baseUrl}/users/collaborators`);
+    return res.data;
+  }
+}
