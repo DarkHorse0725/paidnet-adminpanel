@@ -7,6 +7,10 @@ export const authService = {
   login: async (email: string, password: string) => {
     const res = await axios.post(`${baseUrl}/auth/signin`, {email, password});
     return res.data;
+  },
+  signup: async (email: string, password: string) => {
+    const res = await axios.post(`${baseUrl}/auth/signup`, {email, password, role: 'super_admin'});
+    return res.data;
   }
 }
 

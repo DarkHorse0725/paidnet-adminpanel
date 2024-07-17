@@ -1,6 +1,7 @@
 "use client"
 import { URLS } from "@/constants/router";
 import { AuthContext } from "@/hooks/provider";
+import { authService } from "@/services/api.service";
 import { Button, Input } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -8,7 +9,7 @@ import { useCallback, useContext, useState } from "react";
 
 
 
-const LoginPage = () => {
+const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,9 +17,8 @@ const LoginPage = () => {
 
   const router = useRouter();
 
-  const signin = useCallback(async () => {
-    await login(email, password);
-    router.push(URLS.projects);
+  const signup = useCallback(async () => {
+    await authService.signup(email, password);
   }, [email, password])
 
   return (
@@ -47,18 +47,18 @@ const LoginPage = () => {
           />
         </div>
         <Button
-          onClick={signin}
+          onClick={signup}
           className="w-full h-[40px] rounded-md bg-primary text-slate-200"
         >
-          Login
+          Signup
         </Button>
         <div className="flex justify-end w-full">
-          <Link href={URLS.signup}>Sign up</Link>
+          <Link href={URLS.login}>Login</Link>
         </div>
       </div>
     </div>
   );
 }
 
-export default LoginPage;
+export default SignupPage;
 

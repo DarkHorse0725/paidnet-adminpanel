@@ -1,8 +1,10 @@
 "use client"
 
 import Notification from "@/components/Notification";
+import { URLS } from "@/constants/router";
 import { authService } from "@/services/api.service";
 import { User } from "@/types";
+import { useRouter } from "next/navigation";
 import { useState, createContext } from "react";
 import toast from "react-hot-toast";
 
@@ -11,7 +13,7 @@ interface AuthContextProps {
   setIsAuthenticated: Function;
   login: Function;
   authUser: User | undefined;
-  // logout: Function;
+  logout: Function;
   // setAuthUser: Function;
 }
 
@@ -29,6 +31,8 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!token);
   const [authUser, setAuthUser] = useState<User>();
   const [pageName, setPageName] = useState('');
+
+  const router = useRouter();
 
   const login = async (email: string, password: string) => {
     try {
@@ -56,9 +60,16 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
+  const logout = async () => {
+    localStorage.removeItem('access_token');
+    setIsAuthenticated(false);
+    router.push(URLS.login);
+  }
+
+
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, setIsAuthenticated, authUser, login }}
+      value={{ isAuthenticated, setIsAuthenticated, authUser, login, logout }}
     >
       <PageContext.Provider value={{pageName, setPageName}}>
         {children}
